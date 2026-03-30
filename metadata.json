@@ -1,0 +1,8 @@
+{
+  "name": "MonoSporsho",
+  "description": "A comprehensive mental health and wellness platform featuring advanced AI image generation, video animation, and intelligent health assistance powered by Gemini.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}
