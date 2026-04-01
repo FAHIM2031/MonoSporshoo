@@ -134,6 +134,42 @@ const FrontPage: React.FC<FrontPageProps> = ({ onLogin, onSignup }) => {
   </div>
 </section>
 
+  {/* How it works Section */}
+      <section className="py-12 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="space-y-8 relative">
+          {/* Hourglass Background Shape */}
+          <div className="absolute left-0 top-0 w-24 h-full opacity-10 pointer-events-none hidden md:block">
+            <div className="w-full h-1/2 bg-[#f4a7a7]" style={{ clipPath: 'polygon(0 0, 100% 0, 50% 100%)' }}></div>
+            <div className="w-full h-1/2 bg-[#f4a7a7]" style={{ clipPath: 'polygon(50% 0, 0 100%, 100% 100%)' }}></div>
+          </div>
+
+          <h2 className="text-3xl md:text-5xl font-black text-[#b91c1c] tracking-tight relative z-10">How does it work?</h2>
+          <div className="space-y-6 relative z-10">
+            {[
+              "collect and store your mental health records",
+              "provide motivational contents and positive affirmations",
+              "display progress dashboard of emotional well-being",
+              "provide daily inspirational notifications",
+              "make sure to upgrade your mental health"
+            ].map((step, i) => (
+              <div key={i} className="flex items-center space-x-6 group">
+                <div className="w-10 h-10 bg-white border-2 border-gray-800 rounded-full flex items-center justify-center text-xl font-black shrink-0 group-hover:bg-gray-800 group-hover:text-white transition shadow-sm">
+                  {i + 1}
+                </div>
+                <p className="text-lg font-bold text-gray-700">{step}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex items-center justify-center min-h-[300px]">
+          <div className="relative w-full h-full flex items-center justify-center">
+            <Workflow size={180} className="text-[#a7c7f4] opacity-40 absolute" />
+            <Activity size={100} className="text-[#7c69f0] relative z-10" />
+            <ShieldCheck size={40} className="text-[#25d366] absolute bottom-10 right-10" />
+          </div>
+        </div>
+      </section>
+
       {/* Library Section */}
       <section className="bg-[#fdfbe6] py-12">
         <div className="max-w-7xl mx-auto px-6 text-center space-y-2 mb-10">
