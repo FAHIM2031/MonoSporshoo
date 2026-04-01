@@ -84,67 +84,55 @@ const FrontPage: React.FC<FrontPageProps> = ({ onLogin, onSignup }) => {
       </section>
 
       {/* Motive Section */}
-      <section className="bg-white py-12">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl md:text-5xl font-black text-[#b91c1c] text-center mb-10 tracking-tight">Our motive for mental health</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: "Sound Mind", desc: "By combining science and empathy, it supports mental clarity, balance and emotional well-being", img:"/images/soundMind1.png", color: "#fbdcdc" },
-              { title: "Inspiration", desc: "It helps users find meaning even in small progress and keep moving forward", img:"/images/inspiration1.png", color: "#fbdcdc" },
-              { title: "Self-love", desc: "Daily affirmations and gentle practices help rebuild a healthy relationship with oneself", img:"/images/selfLove.png", color: "#fbdcdc" },
-              { title: "Confidence", desc: "By recognizing growth, achievements, and emotional strength, the app boosts self-belief", img:"/images/confidence.png", color: "#fbdcdc" }
-            ].map((item, i) => (
-              <div key={i} className="bg-[#fbdcdc] p-6 rounded-2xl space-y-4 flex flex-col items-center text-center group hover:shadow-lg transition-all duration-300">
-                <div className="w-16 h-16 flex items-center justify-center">
-  <img 
-  src={item.img} 
-  alt={item.title} 
-  className="w-24 h-24 object-contain"
-/>
-</div>
-                <h3 className="text-xl font-black text-[#b91c1c]">{item.title}</h3>
-                <p className="text-sm text-gray-700 font-medium leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
+<section className="bg-white py-12">
+  <div className="max-w-7xl mx-auto px-6">
+    <h2 className="text-3xl md:text-5xl font-black text-[#b91c1c] text-center mb-10 tracking-tight">Our motive for mental health</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {[
+        { 
+          title: "Sound Mind", 
+          desc: "By combining science and empathy, it supports mental clarity, balance and emotional well-being", 
+          img: "/images/soundMind1.png", 
+          color: "#fbdcdc",
+          size: "h-48 w-48"
+        },
+        { 
+          title: "Inspiration", 
+          desc: "It helps users find meaning even in small progress and keep moving forward", 
+          img: "/images/inspiration1.png", 
+          color: "#fbdcdc",
+          size: "h-48 w-48"
+        },
+        { 
+          title: "Self-love", 
+          desc: "Daily affirmations and gentle practices help rebuild a healthy relationship with oneself", 
+          img: "/images/selfLoveee.png", 
+          color: "#fbdcdc",
+          size: "h-48 w-48"
+        },
+        { 
+          title: "Confidence", 
+          desc: "By recognizing growth, achievements, and emotional strength, the app boosts self-belief", 
+          img: "/images/confidencelll.png", 
+          color: "#fbdcdc",
+          size: "h-48 w-48"
+        }
+      ].map((item, i) => (
+        <div key={i} className="bg-[#fbdcdc] p-6 rounded-2xl space-y-4 flex flex-col items-center text-center group hover:shadow-lg transition-all duration-300">
+          <div className="w-48 h-48 flex items-center justify-center">
+            <img 
+              src={item.img} 
+              alt={item.title} 
+              className={`${item.size} object-contain mx-auto`} 
+            />
           </div>
+          <h3 className="text-xl font-black text-[#b91c1c]">{item.title}</h3>
+          <p className="text-sm text-gray-700 font-medium leading-relaxed">{item.desc}</p>
         </div>
-      </section>
-
-      {/* How it works Section */}
-      <section className="py-12 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div className="space-y-8 relative">
-          {/* Hourglass Background Shape */}
-          <div className="absolute left-0 top-0 w-24 h-full opacity-10 pointer-events-none hidden md:block">
-            <div className="w-full h-1/2 bg-[#f4a7a7]" style={{ clipPath: 'polygon(0 0, 100% 0, 50% 100%)' }}></div>
-            <div className="w-full h-1/2 bg-[#f4a7a7]" style={{ clipPath: 'polygon(50% 0, 0 100%, 100% 100%)' }}></div>
-          </div>
-
-          <h2 className="text-3xl md:text-5xl font-black text-[#b91c1c] tracking-tight relative z-10">How does it work?</h2>
-          <div className="space-y-6 relative z-10">
-            {[
-              "collect and store your mental health records",
-              "provide motivational contents and positive affirmations",
-              "display progress dashboard of emotional well-being",
-              "provide daily inspirational notifications",
-              "make sure to upgrade your mental health"
-            ].map((step, i) => (
-              <div key={i} className="flex items-center space-x-6 group">
-                <div className="w-10 h-10 bg-white border-2 border-gray-800 rounded-full flex items-center justify-center text-xl font-black shrink-0 group-hover:bg-gray-800 group-hover:text-white transition shadow-sm">
-                  {i + 1}
-                </div>
-                <p className="text-lg font-bold text-gray-700">{step}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex items-center justify-center min-h-[300px]">
-          <div className="relative w-full h-full flex items-center justify-center">
-            <Workflow size={180} className="text-[#a7c7f4] opacity-40 absolute" />
-            <Activity size={100} className="text-[#7c69f0] relative z-10" />
-            <ShieldCheck size={40} className="text-[#25d366] absolute bottom-10 right-10" />
-          </div>
-        </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Library Section */}
       <section className="bg-[#fdfbe6] py-12">
