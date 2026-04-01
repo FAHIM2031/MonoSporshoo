@@ -90,7 +90,7 @@ const FrontPage: React.FC<FrontPageProps> = ({ onLogin, onSignup }) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { title: "Sound Mind", desc: "By combining science and empathy, it supports mental clarity, balance and emotional well-being", img:"/images/soundMind1.png", color: "#fbdcdc" },
-              { title: "Inspiration", desc: "It helps users find meaning even in small progress and keep moving forward", img:"/images/inspiration.png", color: "#fbdcdc" },
+              { title: "Inspiration", desc: "It helps users find meaning even in small progress and keep moving forward", img:"/images/inspiration1.png", color: "#fbdcdc" },
               { title: "Self-love", desc: "Daily affirmations and gentle practices help rebuild a healthy relationship with oneself", img:"/images/selfLove.png", color: "#fbdcdc" },
               { title: "Confidence", desc: "By recognizing growth, achievements, and emotional strength, the app boosts self-belief", img:"/images/confidence.png", color: "#fbdcdc" }
             ].map((item, i) => (
