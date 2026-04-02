@@ -16,9 +16,14 @@ const FrontPage: React.FC<FrontPageProps> = ({ onLogin, onSignup }) => {
       {/* Header */}
       <header className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 bg-[#f4a7a7] rounded-full flex items-center justify-center shadow-sm">
-            <Heart className="text-white" size={24} fill="white" />
-          </div>
+          <div className="flex items-center space-x-3">
+  <img
+    src="/images/mono.png"
+    alt="MonoSporsho Logo"
+    className="h-10 w-auto object-contain"
+  />
+</div>
+
           <div>
             <h1 className="text-2xl font-black text-[#7c69f0] leading-none">MonoSporsho</h1>
             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Mental Health & Wellness</p>
@@ -27,16 +32,16 @@ const FrontPage: React.FC<FrontPageProps> = ({ onLogin, onSignup }) => {
         
         <div className="flex flex-col items-end space-y-2">
           <div className="flex items-center space-x-3">
-            <button className="px-4 py-1.5 bg-[#a7c7f4] text-gray-800 text-sm font-bold rounded-lg hover:bg-[#96b6e3] transition">About us</button>
+            {/* <button className="px-4 py-1.5 bg-[#a7c7f4] text-gray-800 text-sm font-bold rounded-lg hover:bg-[#96b6e3] transition">About us</button> */}
             <button onClick={onLogin} className="px-4 py-1.5 bg-[#a7c7f4] text-gray-800 text-sm font-bold rounded-lg hover:bg-[#96b6e3] transition">Login</button>
             <button onClick={onSignup} className="px-4 py-1.5 bg-[#a7c7f4] text-gray-800 text-sm font-bold rounded-lg hover:bg-[#96b6e3] transition">Signup</button>
           </div>
-          <p className="max-w-md text-right text-[11px] font-bold text-[#1e3a8a] leading-tight">
+          <p className="max-w-md text-right text-[15px] font-bold text-[#1e3a8a] leading-tight">
             We are here to monitor your emotional well-being and manage stress in a private and accessible way. Track. Reflect. Heal.
           </p>
         </div>
       </header>
-
+ <div className="flex-1 h-[2px] bg-gray-400"></div>
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-6 py-8 md:py-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div className="space-y-6">
@@ -44,7 +49,8 @@ const FrontPage: React.FC<FrontPageProps> = ({ onLogin, onSignup }) => {
             <h2 className="text-5xl md:text-7xl font-black text-[#b91c1c] tracking-tighter">MonoSporsho</h2>
             <p className="text-xl md:text-3xl font-bold text-[#1e3a8a]">A safe space for your mind</p>
           </div>
-          
+          {/* <p></p> */}
+
           <div className="space-y-3">
             <div className="flex items-center space-x-3 group cursor-pointer">
               <div className="w-8 h-8 bg-[#1877f2] rounded-full flex items-center justify-center text-white">
@@ -79,33 +85,57 @@ const FrontPage: React.FC<FrontPageProps> = ({ onLogin, onSignup }) => {
       </section>
 
       {/* Motive Section */}
-      <section className="bg-white py-12">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl md:text-5xl font-black text-[#b91c1c] text-center mb-10 tracking-tight">Our motive for mental health</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: "Sound Mind", desc: "By combining science and empathy, it supports mental clarity, balance and emotional well-being", img:"/images/mono.png", color: "#fbdcdc" },
-              { title: "Inspiration", desc: "It helps users find meaning even in small progress and keep moving forward", img:"/images/mono.png", color: "#fbdcdc" },
-              { title: "Self-love", desc: "Daily affirmations and gentle practices help rebuild a healthy relationship with oneself", img:"/images/mono.png", color: "#fbdcdc" },
-              { title: "Confidence", desc: "By recognizing growth, achievements, and emotional strength, the app boosts self-belief", img:"/images/mono.png", color: "#fbdcdc" }
-            ].map((item, i) => (
-              <div key={i} className="bg-[#fbdcdc] p-6 rounded-2xl space-y-4 flex flex-col items-center text-center group hover:shadow-lg transition-all duration-300">
-                <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition">
-  <img 
-    src={item.img} 
-    alt={item.title} 
-    className="w-16 h-16 object-contain"
-  />
-</div>
-                <h3 className="text-xl font-black text-[#b91c1c]">{item.title}</h3>
-                <p className="text-sm text-gray-700 font-medium leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
+<section className="bg-white py-12">
+  <div className="max-w-7xl mx-auto px-6">
+    <h2 className="text-3xl md:text-5xl font-black text-[#b91c1c] text-center mb-10 tracking-tight">Our motive for mental health</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {[
+        { 
+          title: "Sound Mind", 
+          desc: "By combining science and empathy, it supports mental clarity, balance and emotional well-being", 
+          img: "/images/soundMind1.png", 
+          color: "#fbdcdc",
+          size: "h-48 w-48"
+        },
+        { 
+          title: "Inspiration", 
+          desc: "It helps users find meaning even in small progress and keep moving forward", 
+          img: "/images/inspiration1.png", 
+          color: "#fbdcdc",
+          size: "h-48 w-48"
+        },
+        { 
+          title: "Self-love", 
+          desc: "Daily affirmations and gentle practices help rebuild a healthy relationship with oneself", 
+          img: "/images/selfLoveee.png", 
+          color: "#fbdcdc",
+          size: "h-48 w-48"
+        },
+        { 
+          title: "Confidence", 
+          desc: "By recognizing growth, achievements, and emotional strength, the app boosts self-belief", 
+          img: "/images/confidencelll.png", 
+          color: "#fbdcdc",
+          size: "h-48 w-48"
+        }
+      ].map((item, i) => (
+        <div key={i} className="bg-[#fbdcdc] p-6 rounded-2xl space-y-4 flex flex-col items-center text-center group hover:shadow-lg transition-all duration-300">
+          <div className="w-48 h-48 flex items-center justify-center">
+            <img 
+              src={item.img} 
+              alt={item.title} 
+              className={`${item.size} object-contain mx-auto`} 
+            />
           </div>
+          <h3 className="text-xl font-black text-[#b91c1c]">{item.title}</h3>
+          <p className="text-sm text-gray-700 font-medium leading-relaxed">{item.desc}</p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
-      {/* How it works Section */}
+  {/* How it works Section */}
       <section className="py-12 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div className="space-y-8 relative">
           {/* Hourglass Background Shape */}
@@ -227,5 +257,5 @@ const FrontPage: React.FC<FrontPageProps> = ({ onLogin, onSignup }) => {
     </div>
   );
 };
-
+// dsfjsjdfj
 export default FrontPage;
