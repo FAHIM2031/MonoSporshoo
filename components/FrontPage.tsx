@@ -49,7 +49,8 @@ const FrontPage: React.FC<FrontPageProps> = ({ onLogin, onSignup }) => {
             <h2 className="text-5xl md:text-7xl font-black text-[#b91c1c] tracking-tighter">MonoSporsho</h2>
             <p className="text-xl md:text-3xl font-bold text-[#1e3a8a]">A safe space for your mind</p>
           </div>
-          
+          {/* <p></p> */}
+
           <div className="space-y-3">
             <div className="flex items-center space-x-3 group cursor-pointer">
               <div className="w-8 h-8 bg-[#1877f2] rounded-full flex items-center justify-center text-white">
