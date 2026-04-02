@@ -162,44 +162,63 @@ const FrontPage: React.FC<FrontPageProps> = ({ onLogin, onSignup }) => {
             ))}
           </div>
         </div>
-        <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex items-center justify-center min-h-[300px]">
-          <div className="relative w-full h-full flex items-center justify-center">
-            <Workflow size={180} className="text-[#a7c7f4] opacity-40 absolute" />
-            <Activity size={100} className="text-[#7c69f0] relative z-10" />
-            <ShieldCheck size={40} className="text-[#25d366] absolute bottom-10 right-10" />
-          </div>
-        </div>
+          <div className=" p-6 rounded-[2rem] shadow-sm border border-gray-100 flex items-center justify-center min-h-[500px]">
+  <div className="flex items-center justify-center w-full">
+    <img
+      src="/images/therapy.jpeg"
+      alt="Therapy session"
+      className="w-full max-w-5xl object-contain mx-auto"
+    />
+  </div>
+</div>
       </section>
 
       {/* Library Section */}
-      <section className="bg-[#fdfbe6] py-12">
-        <div className="max-w-7xl mx-auto px-6 text-center space-y-2 mb-10">
-          <h2 className="text-3xl md:text-5xl font-black text-[#b91c1c] tracking-tight">Our mental Health Library</h2>
-          <p className="text-lg font-bold text-gray-600">Explore and visit a rich library of credible and accurate mental health insights</p>
-        </div>
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { title: "Mental health conditions", icon: Stethoscope, color: "#fbdcdc" },
-            { title: "What keeps a family together?", icon: Home, color: "#eef3e8" },
-            { title: "What is mental health?", icon: Info, color: "#fdfbe6" },
-            { title: "The effects of trauma", icon: AlertTriangle, color: "#fbdcdc" },
-            { title: "Woman Empowerment", icon: UserCheck, color: "#eef3e8" },
-            { title: "Empathy and self growth", icon: TrendingUp, color: "#fdfbe6" },
-            { title: "Facing Luteal phase", icon: Moon, color: "#fbdcdc" },
-            { title: "Self-care strategies", icon: Coffee, color: "#eef3e8" }
-          ].map((item, i) => (
-            <div key={i} className="bg-white p-3 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 group">
-              <div className="aspect-square rounded-xl overflow-hidden mb-3 flex items-center justify-center bg-gray-50 group-hover:bg-white transition">
-                <item.icon size={64} className="text-[#b91c1c] opacity-60 group-hover:opacity-100 transition-all group-hover:scale-110" />
-              </div>
-              <div className="bg-gray-100 p-3 rounded-lg">
-                <h3 className="font-bold text-gray-800 text-sm text-center">{item.title}</h3>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Library Section */}
+<section className="bg-[#fdfbe6] py-12">
+  <div className="max-w-7xl mx-auto px-6 text-center space-y-2 mb-10">
+    <h2 className="text-3xl md:text-5xl font-black text-[#b91c1c] tracking-tight">
+      Our mental Health Library
+    </h2>
+    <p className="text-lg font-bold text-gray-600">
+      Explore and visit a rich library of credible and accurate mental health insights
+    </p>
+  </div>
 
+  <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    {[
+      { title: "Mental health conditions", img: "/images/healthcondition.jpeg" },
+      { title: "What keeps a family together?", img: "/images/family.jpeg" },
+      { title: "What is mental health?", img: "/images/mentalhealth.jpeg" },
+      { title: "The effects of trauma", img: "/images/trauma.jpeg" },
+      { title: "Woman Empowerment", img: "/images/woman.jpeg" },
+      { title: "Empathy and self growth", img: "/images/empathy.jpeg" },
+      { title: "Facing Luteal phase", img: "/images/lutealphase.jpeg" },
+      // { title: "Self-care strategies", img: "/images/8.jpeg" }
+    ].map((item, i) => (
+      <div
+        key={i}
+        className="bg-gray-100 p-3 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 group"
+      >
+        {/* Image */}
+        <div className="aspect-square rounded-xl overflow-hidden mb-3 flex items-center justify-center bg-gray-50 group-hover:bg-white transition">
+          <img
+            src={item.img}
+            alt={item.title}
+            className="w-full h-full object-cover group-hover:scale-110 transition duration-300"
+          />
+        </div>
+
+        {/* Title */}
+        <div className="bg-gray-100 p-3 rounded-lg">
+          <h3 className="font-bold text-gray-800 text-sm text-center">
+            {item.title}
+          </h3>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
       {/* Footer */}
       <footer className="bg-[#fdfbe6] pt-12 pb-8">
         <div className="max-w-7xl mx-auto px-6 mb-10">
