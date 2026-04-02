@@ -1,8 +1,6 @@
 
 import { UserData } from '../types';
-
-const USERS_KEY = 'monosporsho_users';
-const SESSION_KEY = 'monosporsho_session';
+import { supabase } from './supabase';
 
 export interface UserAccount extends UserData {
   password?: string;
@@ -11,87 +9,225 @@ export interface UserAccount extends UserData {
 export const AuthService = {
   // Register a new user
   register: async (data: UserAccount): Promise<{ success: boolean; message: string; user?: UserData }> => {
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 800));
+    try {
+      if (!data.password) {
+        return { success: false, message: 'Password is required' };
+      }
 
-    const users: UserAccount[] = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
-    
-    if (users.find(u => u.phone === data.phone)) {
-      return { success: false, message: 'Phone number already registered' };
+      // Sign up with Supabase auth
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
+      });
+
+      if (authError) {
+        return { success: false, message: authError.message };
+      }
+
+      if (!authData.user) {
+        return { success: false, message: 'Failed to create user' };
+      }
+
+      // Wait a moment for auth to be fully established
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      const now = new Date().toISOString();
+
+      // Insert user profile with explicit user ID
+      const { error: profileError } = await supabase
+        .from('user_profiles')
+        .insert({
+          id: authData.user.id,
+          name: data.name,
+          phone: data.phone,
+          email: data.email,
+          age: data.age,
+          gender: data.gender,
+          registration_date: now,
+          last_login: now,
+        }, { count: 'exact' });
+
+      if (profileError) {
+        // If profile creation fails, attempt to delete the auth user
+        await supabase.auth.admin.deleteUser(authData.user.id).catch(() => {});
+        return { success: false, message: 'Failed to create profile. Please try again.' };
+      }
+
+      // Create empty user state
+      const { error: stateError } = await supabase
+        .from('user_state')
+        .insert({
+          user_id: authData.user.id,
+          moods: [],
+          journals: [],
+          reminders: [],
+          chats: [],
+          completed_tasks: [],
+          current_daily_task: null,
+        });
+
+      if (stateError) {
+        return { success: false, message: 'Failed to initialize state. Please try again.' };
+      }
+
+      const sessionUser: UserData = {
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        age: data.age,
+        gender: data.gender,
+        registrationDate: now,
+        lastLogin: now,
+      };
+
+      return { success: true, message: 'Registration successful', user: sessionUser };
+    } catch (err) {
+      return { success: false, message: 'An unexpected error occurred during registration' };
     }
-
-    const now = new Date().toISOString();
-    data.registrationDate = now;
-    data.lastLogin = now;
-    users.push(data);
-    localStorage.setItem(USERS_KEY, JSON.stringify(users));
-    
-    // Auto-login after registration
-    const sessionUser = { ...data };
-    delete sessionUser.password;
-    localStorage.setItem(SESSION_KEY, JSON.stringify(sessionUser));
-
-    return { success: true, message: 'Registration successful', user: sessionUser };
   },
 
   // Login existing user
-  login: async (phone: string, password: string): Promise<{ success: boolean; message: string; user?: UserData }> => {
-    await new Promise(resolve => setTimeout(resolve, 800));
+  login: async (email: string, password: string): Promise<{ success: boolean; message: string; user?: UserData }> => {
+    try {
+      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    const users: UserAccount[] = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
-    const user = users.find(u => u.phone === phone && u.password === password);
-
-    if (!user) {
-      return { success: false, message: 'Invalid phone number or password' };
-    }
-
-    const now = new Date().toISOString();
-    user.lastLogin = now;
-    localStorage.setItem(USERS_KEY, JSON.stringify(users));
-
-    const sessionUser = { ...user };
-    delete sessionUser.password;
-    localStorage.setItem(SESSION_KEY, JSON.stringify(sessionUser));
-
-    return { success: true, message: 'Login successful', user: sessionUser };
-  },
-
-  // Verify password for a user (without changing session)
-  verifyPassword: (phone: string, password: string): boolean => {
-    const users: UserAccount[] = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
-    return users.some(u => u.phone === phone && u.password === password);
-  },
-
-  // Update profile picture
-  updateProfilePicture: (phone: string, base64: string): UserData | null => {
-    const users: UserAccount[] = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
-    const userIndex = users.findIndex(u => u.phone === phone);
-    
-    if (userIndex === -1) return null;
-
-    users[userIndex].profilePic = base64;
-    localStorage.setItem(USERS_KEY, JSON.stringify(users));
-
-    const session = localStorage.getItem(SESSION_KEY);
-    if (session) {
-      const sessionUser: UserData = JSON.parse(session);
-      if (sessionUser.phone === phone) {
-        sessionUser.profilePic = base64;
-        localStorage.setItem(SESSION_KEY, JSON.stringify(sessionUser));
-        return sessionUser;
+      if (authError) {
+        return { success: false, message: authError.message };
       }
+
+      if (!authData.user) {
+        return { success: false, message: 'Login failed' };
+      }
+
+      // Fetch user profile
+      const { data: profile, error: profileError } = await supabase
+        .from('user_profiles')
+        .select('*')
+        .eq('id', authData.user.id)
+        .single();
+
+      if (profileError || !profile) {
+        return { success: false, message: 'Failed to fetch user profile' };
+      }
+
+      // Update last login
+      await supabase
+        .from('user_profiles')
+        .update({ last_login: new Date().toISOString() })
+        .eq('id', authData.user.id);
+
+      const sessionUser: UserData = {
+        name: profile.name,
+        phone: profile.phone,
+        email: profile.email,
+        age: profile.age,
+        gender: profile.gender,
+        profilePic: profile.profile_pic,
+        registrationDate: profile.registration_date,
+        lastLogin: profile.last_login,
+      };
+
+      return { success: true, message: 'Login successful', user: sessionUser };
+    } catch (err) {
+      return { success: false, message: 'An unexpected error occurred during login' };
     }
-    return null;
   },
 
   // Logout
-  logout: () => {
-    localStorage.removeItem(SESSION_KEY);
+  logout: async () => {
+    await supabase.auth.signOut();
   },
 
   // Get current logged in user
-  getCurrentUser: (): UserData | null => {
-    const session = localStorage.getItem(SESSION_KEY);
-    return session ? JSON.parse(session) : null;
-  }
+  getCurrentUser: async (): Promise<UserData | null> => {
+    try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      
+      if (!sessionData.session || !sessionData.session.user) {
+        return null;
+      }
+
+      const { data: profile, error } = await supabase
+        .from('user_profiles')
+        .select('*')
+        .eq('id', sessionData.session.user.id)
+        .single();
+
+      if (error || !profile) {
+        return null;
+      }
+
+      return {
+        name: profile.name,
+        phone: profile.phone,
+        email: profile.email,
+        age: profile.age,
+        gender: profile.gender,
+        profilePic: profile.profile_pic,
+        registrationDate: profile.registration_date,
+        lastLogin: profile.last_login,
+      };
+    } catch (err) {
+      return null;
+    }
+  },
+
+  // Update profile picture
+  updateProfilePicture: async (email: string, base64: string): Promise<UserData | null> => {
+    try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      
+      if (!sessionData.session?.user) {
+        return null;
+      }
+
+      const { error } = await supabase
+        .from('user_profiles')
+        .update({ profile_pic: base64 })
+        .eq('id', sessionData.session.user.id);
+
+      if (error) {
+        return null;
+      }
+
+      const { data: profile } = await supabase
+        .from('user_profiles')
+        .select('*')
+        .eq('id', sessionData.session.user.id)
+        .single();
+
+      if (!profile) {
+        return null;
+      }
+
+      return {
+        name: profile.name,
+        phone: profile.phone,
+        email: profile.email,
+        age: profile.age,
+        gender: profile.gender,
+        profilePic: profile.profile_pic,
+        registrationDate: profile.registration_date,
+        lastLogin: profile.last_login,
+      };
+    } catch (err) {
+      return null;
+    }
+  },
+
+  // Verify password for current session (for locked journal access)
+  verifyPassword: async (email: string, password: string): Promise<boolean> => {
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      return !error;
+    } catch (err) {
+      return false;
+    }
+  },
 };

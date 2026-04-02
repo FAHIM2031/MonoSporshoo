@@ -71,9 +71,9 @@ const Journaling: React.FC<JournalingProps> = ({ user, entries, onSave, onUpdate
     }
   };
 
-  const handleUnlock = () => {
+  const handleUnlock = async () => {
     setError(false);
-    const success = AuthService.verifyPassword(user.phone, passwordInput);
+    const success = await AuthService.verifyPassword(user.email, passwordInput);
     if (success) {
       setIsUnlocked(true);
       setStage('history');

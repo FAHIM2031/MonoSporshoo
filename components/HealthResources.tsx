@@ -172,7 +172,7 @@ const HealthResources: React.FC = () => {
     try {
       const ai = gemini.getAI();
       const prompt = `Write a detailed and comprehensive article about "${article.title}". 
-      The article should be approximately 200 lines of text. 
+      The article should be approximately 100 lines of text. 
       Use clear subheadings (at least 8-10), detailed bullet points, and thorough explanations for each section. 
       Include:
       1. Introduction and definition.
@@ -186,12 +186,12 @@ const HealthResources: React.FC = () => {
       9. Supportive messages and encouragement.
       10. Conclusion.
       
-      Format it with clear line breaks and aim for a length of 200 lines.`;
+      Format it with clear line breaks and aim for a length of 100 lines.`;
 
       const response = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
-        contents: prompt
-      });
+      model: 'gemini-2.5-flash',
+      contents: prompt
+});
 
       setGeneratedContent(response.text || "Could not generate content at this time.");
     } catch (error) {

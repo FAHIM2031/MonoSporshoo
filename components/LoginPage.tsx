@@ -9,7 +9,7 @@ interface LoginPageProps {
 }
 
 const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onGoToRegister }) => {
-  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +21,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onGoToRegister })
     setIsLoading(true);
 
     try {
-      const result = await AuthService.login(phone, password);
+      const result = await AuthService.login(email, password);
       if (result.success && result.user) {
         onLoginSuccess(result.user);
       } else {
@@ -93,14 +93,14 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onGoToRegister })
 
           <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
             <div>
-              <label className="block text-gray-900 font-bold text-xs md:text-sm mb-1.5 md:mb-2 uppercase tracking-wide">Phone Number</label>
+              <label className="block text-gray-900 font-bold text-xs md:text-sm mb-1.5 md:mb-2 uppercase tracking-wide">Email Address</label>
               <input
                 required
-                type="tel"
+                type="email"
                 disabled={isLoading}
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="Enter your Phone Number"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your Email Address"
                 className="w-full p-3 md:p-4 rounded-xl bg-white border-none focus:ring-2 focus:ring-[#f4a7a7] transition shadow-sm text-sm md:text-base placeholder:text-gray-300 disabled:opacity-50"
               />
             </div>

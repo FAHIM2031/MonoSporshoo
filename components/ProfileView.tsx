@@ -19,9 +19,9 @@ const ProfileView: React.FC<ProfileViewProps> = ({ user, avatarUrl, onUpdateUser
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => {
+      reader.onloadend = async () => {
         const base64String = reader.result as string;
-        const updatedUser = AuthService.updateProfilePicture(user.phone, base64String);
+        const updatedUser = await AuthService.updateProfilePicture(user.email, base64String);
         if (updatedUser) {
           onUpdateUser(updatedUser);
         }

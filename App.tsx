@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FrontPage from './components/FrontPage';
 import LoginPage from './components/LoginPage';
 import RegistrationPage from './components/RegistrationPage';
@@ -10,7 +10,19 @@ import { AuthService } from './services/auth';
 const App: React.FC = () => {
   const [view, setView] = useState<ViewState>(ViewState.FRONT);
   const [userData, setUserData] = useState<UserData | null>(null);
-  const [isInitializing] = useState(false);
+  const [isInitializing, setIsInitializing] = useState(true);
+
+  useEffect(() => {
+    const restoreSession = async () => {
+      const user = await AuthService.getCurrentUser();
+      if (user) {
+        setUserData(user);
+        setView(ViewState.DASHBOARD);
+      }
+      setIsInitializing(false);
+    };
+    restoreSession();
+  }, []);
 
   const handleLogin = (user: UserData) => {
     setUserData(user);
@@ -22,8 +34,8 @@ const App: React.FC = () => {
     setView(ViewState.DASHBOARD);
   };
 
-  const handleLogout = () => {
-    AuthService.logout();
+  const handleLogout = async () => {
+    await AuthService.logout();
     setUserData(null);
     setView(ViewState.FRONT);
   };

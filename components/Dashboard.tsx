@@ -63,35 +63,39 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout, onUpdateUser }) =
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const data = DatabaseService.getUserData(user.phone);
-    setMoodHistory(data.moods);
-    setJournalEntries(data.journals);
-    setChatHistory(data.chats || []);
-    setCompletedTasks(data.completedTasks || []);
-    setCurrentDailyTask(data.currentDailyTask);
-    const savedReminders = data.reminders;
-    if (savedReminders && Array.isArray(savedReminders)) {
-      setReminders(savedReminders);
-    } else {
-      setReminders([
-        { id: '1', title: "Daily Mood Check-in", desc: "How are you feeling right now?", time: "09:00", icon: "😊", active: true },
-        { id: '2', title: "Evening Reflection", desc: "A great time to journal.", time: "21:30", icon: "🌙", active: true }
-      ]);
-    }
-    setIsLoaded(true);
+    const loadData = async () => {
+      const data = await DatabaseService.getUserData();
+      setMoodHistory(data.moods);
+      setJournalEntries(data.journals);
+      setChatHistory(data.chats || []);
+      setCompletedTasks(data.completedTasks || []);
+      setCurrentDailyTask(data.currentDailyTask);
+      const savedReminders = data.reminders;
+      if (savedReminders && Array.isArray(savedReminders)) {
+        setReminders(savedReminders);
+      } else {
+        setReminders([
+          { id: '1', title: "Daily Mood Check-in", desc: "How are you feeling right now?", time: "09:00", icon: "😊", active: true },
+          { id: '2', title: "Evening Reflection", desc: "A great time to journal.", time: "21:30", icon: "🌙", active: true }
+        ]);
+      }
+      setIsLoaded(true);
+    };
 
     const checkKey = async () => {
       // @ts-ignore
       if (window.aistudio && await window.aistudio.hasSelectedApiKey()) setHasApiKey(true);
       else if (process.env.API_KEY) setHasApiKey(true);
     };
+
+    loadData();
     checkKey();
-  }, [user.phone]);
+  }, []);
 
   // Persist data on change
   useEffect(() => {
     if (isLoaded) {
-      DatabaseService.saveUserData(user.phone, { 
+      DatabaseService.saveUserData({ 
         moods: moodHistory, 
         journals: journalEntries, 
         reminders, 
@@ -100,7 +104,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout, onUpdateUser }) =
         currentDailyTask
       });
     }
-  }, [moodHistory, journalEntries, reminders, chatHistory, completedTasks, currentDailyTask, user.phone, isLoaded]);
+  }, [moodHistory, journalEntries, reminders, chatHistory, completedTasks, currentDailyTask, isLoaded]);
 
   // Real-time notification engine
   useEffect(() => {
