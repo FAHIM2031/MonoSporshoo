@@ -242,7 +242,11 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout, onUpdateUser }) =
       case 'profile':
         return <ProfileView user={user} avatarUrl={userAvatarUrl} onUpdateUser={onUpdateUser} />;
       default:
-        return <HomeView user={user} onNavigate={setActiveSegment} />;
+        return <HomeView user={user} onNavigate={setActiveSegment} currentTask={null} onUpdateTask={function (task: DailyTask): void {
+          throw new Error('Function not implemented.');
+        } } onCompleteTask={function (task: DailyTask): void {
+          throw new Error('Function not implemented.');
+        } } />;
     }
   };
 
@@ -301,11 +305,13 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout, onUpdateUser }) =
               </svg>
             </button>
             <div className="w-8 h-8 md:w-10 md:h-10">
-               <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                 <circle cx="50" cy="50" r="45" fill="#f4a7a7" fillOpacity="0.2"/><path d="M50 30C40 30 32 38 32 48C32 58 50 75 50 75C50 75 68 58 68 48C68 38 60 30 50 30Z" fill="#f4a7a7"/><circle cx="50" cy="48" r="8" fill="white"/>
-               </svg>
+               <img
+  src="/images/mono.png"
+  alt="Logo"
+  className="w-10 h-10 object-contain"
+/>
             </div>
-            <h1 className="text-lg md:text-xl font-bold text-gray-800 truncate">MonoSporsho <span className="hidden sm:inline text-[#f4a7a7] uppercase tracking-tighter ml-2 font-black">{activeSegment}</span></h1>
+            <h1 className="text-lg md:text-xl font-bold text-[#7c69f0] truncate">MonoSporsho <span className="hidden sm:inline text-[#f4a7a7] uppercase tracking-tighter ml-2 font-black">{activeSegment}</span></h1>
           </div>
         </header>
 
