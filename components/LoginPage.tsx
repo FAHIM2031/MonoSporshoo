@@ -35,37 +35,37 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onGoToRegister })
   };
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen">
+   <div className="flex flex-col md:flex-row min-h-screen">
       {/* Left Panel - Illustration */}
       <div className="md:w-1/2 bg-[#eef3e8] p-6 md:p-8 flex flex-col items-center justify-between text-center min-h-[350px] md:min-h-0">
         <div className="w-full flex justify-start">
            <div className="flex items-center space-x-2">
              <div className="w-12 h-12 md:w-16 md:h-16">
-               <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                 <circle cx="50" cy="50" r="45" fill="#f4a7a7" fillOpacity="0.2"/>
-                 <path d="M50 30C40 30 32 38 32 48C32 58 50 75 50 75C50 75 68 58 68 48C68 38 60 30 50 30Z" fill="#f4a7a7"/>
-                 <circle cx="50" cy="48" r="8" fill="white"/>
-               </svg>
-             </div>
+  <img
+    src="/images/mono.png"
+    alt="MonoSporsho Logo"
+    className="w-full h-full object-contain"
+  />
+</div>
              <div className="text-left">
-               <h1 className="text-lg md:text-xl font-bold text-[#6d8a7c]">MonoSporsho</h1>
-               <p className="text-[8px] md:text-[10px] text-gray-500 uppercase tracking-widest">Mental Health & Wellness</p>
+              <h1 className="text-2xl font-black text-[#7c69f0] leading-none">MonoSporsho</h1>
+               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Mental Health & Wellness</p>
              </div>
            </div>
         </div>
         
-        <div className="flex flex-col items-center flex-1 justify-center py-4">
-          <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full bg-white/40 flex items-center justify-center overflow-hidden mb-6 md:mb-8 shadow-inner p-8">
-             <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-               <circle cx="100" cy="100" r="80" fill="#f4a7a7" fillOpacity="0.1"/>
-               <path d="M100 140C130 140 150 120 150 90C150 60 130 40 100 40C70 40 50 60 50 90C50 120 70 140 100 140Z" stroke="#6d8a7c" strokeWidth="4" strokeLinecap="round"/>
-               <circle cx="100" cy="85" r="15" fill="#6d8a7c"/>
-               <path d="M70 115C80 105 120 105 130 115" stroke="#6d8a7c" strokeWidth="4" strokeLinecap="round"/>
-               <rect x="40" y="80" width="10" height="20" rx="5" fill="#f4a7a7" className="animate-bounce" style={{animationDelay: '0.2s'}}/>
-               <rect x="150" y="70" width="12" height="24" rx="6" fill="#f4a7a7" className="animate-bounce" style={{animationDelay: '0.5s'}}/>
-               <circle cx="160" cy="130" r="5" fill="#6d8a7c" opacity="0.4"/>
-               <circle cx="30" cy="60" r="8" fill="#6d8a7c" opacity="0.2"/>
-             </svg>
+       <div className="flex flex-col items-center flex-1 justify-center py-4">
+  
+  <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 
+  rounded-full flex items-center justify-center overflow-hidden 
+  mb-6 md:mb-8 shadow-inner p-2">
+
+    <img
+      src="/images/login.jpeg"
+      alt="Login Illustration"
+      className="w-full h-full object-cover rounded-full"
+    />
+    
           </div>
           <div className="max-w-sm px-4">
             <h2 className="text-xl md:text-3xl font-bold text-gray-700 leading-tight">

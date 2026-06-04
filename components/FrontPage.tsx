@@ -73,15 +73,15 @@ const FrontPage: React.FC<FrontPageProps> = ({ onLogin, onSignup }) => {
           </div>
         </div>
         <div className="relative">
-          <div className="aspect-square bg-[#fbdcdc] rounded-t-full flex items-center justify-center p-12">
-            <div className="relative w-full h-full flex items-center justify-center">
-              <Heart size={200} className="text-[#b91c1c] opacity-20 absolute" fill="#b91c1c" />
-              <Brain size={120} className="text-[#b91c1c] relative z-10" />
-              <Sparkles size={40} className="text-[#f4a7a7] absolute top-10 right-10 animate-pulse" />
-            </div>
-          </div>
-          <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-[#f4a7a7] rounded-full opacity-20 blur-xl"></div>
-        </div>
+         <div className="aspect-square bg-[#fbdcdc] rounded-t-full overflow-hidden flex items-end justify-center">
+      <img
+        src="/images/hero(updated).png"
+        alt="MonoSporsho"
+        className="w-full h-full object-cover object-top"
+      />
+    </div>
+    <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-[#f4a7a7] rounded-full opacity-20 blur-xl"></div>
+  </div>
       </section>
 
       {/* Motive Section */}

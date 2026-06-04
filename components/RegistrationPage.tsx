@@ -67,31 +67,33 @@ const RegistrationPage: React.FC<RegistrationPageProps> = ({ onRegisterSuccess, 
       <div className="md:w-1/2 bg-[#eef3e8] p-6 md:p-8 flex flex-col items-center justify-between text-center min-h-[300px] md:min-h-0">
         <div className="w-full flex justify-start">
            <div className="flex items-center space-x-2">
-             <div className="w-10 h-10 md:w-14 md:h-14">
-               <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                 <circle cx="50" cy="50" r="45" fill="#f4a7a7" fillOpacity="0.2"/>
-                 <path d="M50 30C40 30 32 38 32 48C32 58 50 75 50 75C50 75 68 58 68 48C68 38 60 30 50 30Z" fill="#f4a7a7"/>
-                 <circle cx="50" cy="48" r="8" fill="white"/>
-               </svg>
-             </div>
+             <div className="w-12 h-12 md:w-16 md:h-16">
+  <img
+    src="/images/mono.png"
+    alt="MonoSporsho Logo"
+    className="w-full h-full object-contain"
+  />
+</div>
              <div className="text-left">
-               <h1 className="text-lg md:text-xl font-bold text-[#6d8a7c]">MonoSporsho</h1>
-               <p className="text-[8px] md:text-[10px] text-gray-500 uppercase tracking-widest">Wellness</p>
+             <h1 className="text-2xl font-black text-[#7c69f0] leading-none">MonoSporsho</h1>
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Mental Health & Wellness</p>
              </div>
            </div>
         </div>
         
         <div className="flex flex-col items-center flex-1 justify-center py-4">
-          <div className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full bg-white/40 flex items-center justify-center overflow-hidden mb-6 md:mb-8 shadow-inner p-8">
-             <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-               <path d="M100 160V100" stroke="#6d8a7c" strokeWidth="6" strokeLinecap="round"/>
-               <path d="M100 100C120 80 160 80 160 120C160 160 100 180 100 180C100 180 40 160 40 120C40 80 80 80 100 100Z" fill="#f4a7a7" fillOpacity="0.3" stroke="#f4a7a7" strokeWidth="4"/>
-               <path d="M100 100C110 80 130 80 130 100C130 120 100 130 100 130C100 130 70 120 70 100C70 80 90 80 100 100Z" fill="#f4a7a7"/>
-               <circle cx="100" cy="60" r="15" fill="#6d8a7c"/>
-               <path d="M100 100L140 60" stroke="#6d8a7c" strokeWidth="4" strokeLinecap="round" opacity="0.4"/>
-               <path d="M100 100L60 60" stroke="#6d8a7c" strokeWidth="4" strokeLinecap="round" opacity="0.4"/>
-             </svg>
-          </div>
+          
+  <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 
+  rounded-full flex items-center justify-center overflow-hidden 
+  mb-6 md:mb-8 shadow-inner p-2">
+
+    <img
+      src="/images/register.jpeg"
+      alt="Login Illustration"
+      className="w-full h-full object-cover rounded-full"
+    />
+
+  </div>
           <div className="max-w-md px-4">
             <h2 className="text-xl md:text-3xl font-bold text-gray-700 leading-tight">
               Join MonoSporsho today,
@@ -106,15 +108,18 @@ const RegistrationPage: React.FC<RegistrationPageProps> = ({ onRegisterSuccess, 
       </div>
 
       {/* Right Panel - Form */}
-      <div className="md:w-1/2 bg-[#faf1f1] p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-center overflow-y-auto max-h-screen custom-scrollbar">
-        <div className="max-w-md mx-auto w-full">
-          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-6 md:mb-8">Register</h2>
-          
-          {error && (
-            <div className="mb-6 p-3 bg-red-100 border border-red-200 text-red-700 text-sm rounded-xl">
-              {error}
-            </div>
-          )}
+    <div className="md:w-1/2 bg-[#faf1f1] p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-start pt-6 min-h-screen">
+  <div className="max-w-md mx-auto w-full">
+    
+    <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-6 md:mb-8">
+      Register
+    </h2>
+
+    {error && (
+      <div className="mb-6 p-3 bg-red-100 border border-red-200 text-red-700 text-sm rounded-xl">
+        {error}
+      </div>
+    )}
 
           <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4">
             <div>
