@@ -147,11 +147,11 @@ const FrontPage: React.FC<FrontPageProps> = ({ onLogin, onSignup }) => {
           <h2 className="text-3xl md:text-5xl font-black text-[#b91c1c] tracking-tight relative z-10">How does it work?</h2>
           <div className="space-y-6 relative z-10">
             {[
-              "collect and store your mental health records",
-              "provide motivational contents and positive affirmations",
-              "display progress dashboard of emotional well-being",
-              "provide daily inspirational notifications",
-              "make sure to upgrade your mental health"
+              "Collect and store your mental health records",
+              "Provide motivational contents and positive affirmations",
+              "Display progress dashboard of emotional well-being",
+              "Provide daily inspirational notifications",
+              "Make sure to upgrade your mental health"
             ].map((step, i) => (
               <div key={i} className="flex items-center space-x-6 group">
                 <div className="w-10 h-10 bg-white border-2 border-gray-800 rounded-full flex items-center justify-center text-xl font-black shrink-0 group-hover:bg-gray-800 group-hover:text-white transition shadow-sm">
@@ -194,6 +194,7 @@ const FrontPage: React.FC<FrontPageProps> = ({ onLogin, onSignup }) => {
       { title: "Woman Empowerment", img: "/images/woman.jpeg" },
       { title: "Empathy and self growth", img: "/images/empathy.jpeg" },
       { title: "Facing Luteal phase", img: "/images/lutealphase.jpeg" },
+      { title: "Dealing with Depression", img: "/images/depression.png" },
       // { title: "Self-care strategies", img: "/images/8.jpeg" }
     ].map((item, i) => (
       <div
