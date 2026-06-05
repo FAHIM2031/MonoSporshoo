@@ -57,9 +57,11 @@ const RegistrationPage: React.FC<RegistrationPageProps> = ({ onRegisterSuccess, 
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+const handleChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+) => {
+  setFormData({ ...formData, [e.target.name]: e.target.value });
+};
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
@@ -181,16 +183,19 @@ const RegistrationPage: React.FC<RegistrationPageProps> = ({ onRegisterSuccess, 
               </div>
               <div>
                 <label className="block text-gray-700 font-bold text-xs md:text-sm mb-1 uppercase tracking-wide">Gender</label>
-                <input
-                  required
-                  type="text"
-                  name="gender"
-                  disabled={isLoading}
-                  value={formData.gender}
-                  onChange={handleChange}
-                  placeholder="Gender"
-                  className="w-full p-3 md:p-4 rounded-xl bg-white border-none focus:ring-2 focus:ring-[#f4a7a7] transition shadow-sm text-sm disabled:opacity-50"
-                />
+                <select
+  required
+  name="gender"
+  disabled={isLoading}
+  value={formData.gender}
+  onChange={handleChange}
+  className="w-full p-3 md:p-4 rounded-xl bg-white border-none focus:ring-2 focus:ring-[#f4a7a7] transition shadow-sm text-sm disabled:opacity-50"
+>
+  <option value="">Select Gender</option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
+  <option value="Other">Other</option>
+</select>
               </div>
             </div>
 
